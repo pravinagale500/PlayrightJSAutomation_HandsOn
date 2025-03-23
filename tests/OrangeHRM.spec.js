@@ -1,4 +1,5 @@
 const {test,expect}=require('@playwright/test');
+const OHRMLoginPage = require("../pages/Orangehrm_Login.spec.js")
 
 
 test('Login Organe HRM', async ({page})=>{
@@ -10,7 +11,7 @@ test('Login Organe HRM', async ({page})=>{
     const username = page.locator("input[placeholder='Username']");
     const password = page.locator("input[placeholder='Password']");
     const loginBtn = page.locator("button[type='submit']");
-    const dasboard = page.locator("oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module");
+    // const dasboard = page.locator("oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module");
 
     await username.fill("Admin");
     await password.fill("admin123");
@@ -38,7 +39,7 @@ test('Browser Context', async ({browser})=>{
     })
 
 
-    test('Page Context', async ({page})=>{
+test('Page Context', async ({page})=>{
         //async - it will not follow defined steps.
         //await  - to instruct to execute the step one first 
 
@@ -47,3 +48,5 @@ test('Browser Context', async ({browser})=>{
         await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
         page.close();
         })
+
+
