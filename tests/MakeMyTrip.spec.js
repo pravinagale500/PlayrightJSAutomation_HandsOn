@@ -1,7 +1,7 @@
 const {test,expect} = require('@playwright/test')
 
 
-test.only('MakeMyTrip Flights', async ({page})=>{
+test('MakeMyTrip Flights', async ({page})=>{
 
     await page.goto("https://www.makemytrip.com/");
 
