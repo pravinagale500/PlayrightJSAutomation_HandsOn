@@ -11,8 +11,8 @@ test('MakeMyTrip Flights', async ({page})=>{
 
     const fromCityName = "Mumbai, India";
     const toCityName = "Bengaluru, India";
-    const dayPickerDay = "Sun Mar 23 2025";
-    const dayPickerReturnDay = "Mon Mar 24 2025";
+    const dayPickerDay = "Mon Mar 24 2025";
+    const dayPickerReturnDay = "Thu Mar 27 2025";
     const closeModal =page.locator("span.commonModal__close");
     const fromCityLocator = page.locator("#fromCity");
     const fromInputLocator= page.locator("input[placeholder='From']");
@@ -21,7 +21,7 @@ test('MakeMyTrip Flights', async ({page})=>{
     const toInputLocator= page.locator("input[placeholder='To']");
     const toCities = page.locator("//p[text()='"+toCityName+"']");
     const dayPicker = page.locator("(//div[@class='DayPicker'])[1]");
-    const dayPickerDayLocator = page.locator("DayPicker-Day DayPicker-Day--start DayPicker-Day--selected DayPicker-Day--today");
+    const dayPickerDayLocator = page.locator("div[aria-label='"+dayPickerDay+"'] p:nth-child(1)");
     const tapOnReturnDate = page.locator("p.latoBlack.font12.greyText.lineHeight16")
     const dayPickerDayReturnLocator = page.locator("div[aria-label='"+dayPickerReturnDay+"'] p:nth-child(1)");
 
