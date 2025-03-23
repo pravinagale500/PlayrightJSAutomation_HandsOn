@@ -11,8 +11,8 @@ test('MakeMyTrip Flights', async ({page})=>{
 
     const fromCityName = "Mumbai, India";
     const toCityName = "Bengaluru, India";
-    const dayPickerDay = "Fri Mar 21 2025";
-    const dayPickerReturnDay = "Sat Mar 22 2025";
+    const dayPickerDay = "Sun Mar 23 2025";
+    const dayPickerReturnDay = "Mon Mar 24 2025";
     const closeModal =page.locator("span.commonModal__close");
     const fromCityLocator = page.locator("#fromCity");
     const fromInputLocator= page.locator("input[placeholder='From']");
