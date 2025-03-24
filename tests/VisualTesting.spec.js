@@ -20,7 +20,7 @@ if(boundingBox){
 test.only('Verify Login Button Visual', async ({ page }) => {
     await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
   
-    const loginButton = await page.locator("button.oxd-button.oxd-button--medium.oxd-button--main.orangehrm-login-button"); // Corrected selector
+    const loginButton =  page.locator("button.oxd-button.oxd-button--medium.oxd-button--main.orangehrm-login-button"); // Corrected selector
   
 
     // Optionally, you can also add assertions about the button's properties.
