@@ -51,3 +51,10 @@ test('Confirm logo color', async ({page})=>{
     expect(logoStyle.color).toBe("rgb(0, 0, 0)");
 
 })
+
+
+test('toHaveScreenshot', async ({ page }) => {
+    await page.goto('https://playwright.dev');
+    await expect(page).toHaveScreenshot({ maxDiffPixels: 100 });
+  });
+
