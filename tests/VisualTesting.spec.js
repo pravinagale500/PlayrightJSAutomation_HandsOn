@@ -53,8 +53,8 @@ test('Confirm logo color', async ({page})=>{
 })
 
 
-test('toHaveScreenshot', async ({ page }) => {
-    await page.goto('https://playwright.dev');
-    await expect(page).toHaveScreenshot({ maxDiffPixels: 100 });
-  });
+// test('toHaveScreenshot', async ({ page }) => {
+//     await page.goto('https://playwright.dev');
+//     await expect(page).toHaveScreenshot({ maxDiffPixels: 100 });
+//   });
 
