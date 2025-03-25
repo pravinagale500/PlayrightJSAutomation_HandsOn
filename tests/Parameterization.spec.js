@@ -1,5 +1,5 @@
 const {test,expect}=require('@playwright/test')
-const dataset = JSON.parse(JSON.stringify(require('../resources/loginTestData.json')));
+const data = JSON.parse(JSON.stringify(require('../resources/loginTestData.json')));
 
 
 test.beforeEach(async ({page})=>{
