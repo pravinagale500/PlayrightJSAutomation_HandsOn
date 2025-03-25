@@ -2,12 +2,13 @@ const {test,expect}=require('@playwright/test');
 const OHRMLoginPage = require("../pages/Orangehrm_Login.spec.js")
 
 test.describe('Orange HRM LOgin Test', ()=>{
-test('Login Organe HRM', async ({page})=>{
 
+test.beforeEach(async ({page})=>{
     await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+})
 
+test('Login Organe HRM', async ({page})=>{
     await expect(page).toHaveTitle(/OrangeHRM/);
-
     const username = page.locator("input[placeholder='Username']");
     const password = page.locator("input[placeholder='Password']");
     const loginBtn = page.locator("button[type='submit']");
@@ -46,7 +47,13 @@ test('Page Context', async ({page})=>{
         // const context = await browser.newContext();
         // const page =  await context.newPage();
         await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-        page.close();
+     
         })
 
     })
+
+
+ test.afterEach(async ({page})=>{
+    page.close();
+
+ })   
