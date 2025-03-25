@@ -82,7 +82,7 @@ test('Links', async ({page})=>{
 })
 
 
-test('Child Windows', async ({browser})=>{
+test(' @regression Child Windows', async ({browser})=>{
 
 
     const context = await browser.newContext();
