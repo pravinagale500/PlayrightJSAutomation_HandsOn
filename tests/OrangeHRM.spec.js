@@ -7,7 +7,7 @@ test.beforeEach(async ({page})=>{
     await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 })
 
-test('Login Organe HRM', async ({page})=>{
+test('login Organe HRM', async ({page})=>{
     await expect(page).toHaveTitle(/OrangeHRM/);
     const username = page.locator("input[placeholder='Username']");
     const password = page.locator("input[placeholder='Password']");
