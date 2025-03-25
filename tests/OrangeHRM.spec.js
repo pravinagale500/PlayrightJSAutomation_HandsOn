@@ -1,7 +1,7 @@
 const {test,expect}=require('@playwright/test');
 const OHRMLoginPage = require("../pages/Orangehrm_Login.spec.js")
 
-
+test.describe('Orange HRM LOgin Test', ()=>{
 test('Login Organe HRM', async ({page})=>{
 
     await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
@@ -49,4 +49,4 @@ test('Page Context', async ({page})=>{
         page.close();
         })
 
-
+    })
