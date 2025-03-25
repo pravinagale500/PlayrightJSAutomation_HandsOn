@@ -23,12 +23,12 @@ test.beforeEach(async ({page})=>{
 
 test('Login Organe HRM', async ({page})=>{
         await expect(page).toHaveTitle(/OrangeHRM/);
-        const username = page.locator("input[placeholder='Username']");
-        const password = page.locator("input[placeholder='Password']");
+        const usernameInput = page.locator("input[placeholder='Username']");
+        const passwordInput = page.locator("input[placeholder='Password']");
         const loginBtn = page.locator("button[type='submit']");
     
-        await username.fill(data.username);
-        await password.fill(data.password);
+        await usernameInput.fill(data.username);
+        await passwordInput.fill(data.password);
         await loginBtn.click();
     });
 
