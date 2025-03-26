@@ -101,8 +101,13 @@ test(' @regression Child Windows', async ({browser})=>{
      ])
 
      const text = await newPage.locator('.red').textContent();
-     console.log(text);
+     const arrayText = text.split('@');
+     const domain = arrayText[1].split(" ")[0];
+     console.log(domain);
 
+     const domian2 = domain.split('.');
+     const usernameText = domian2[0].split(" ")[0];
+     console.log(usernameText);
      newPage.close();
 
      await page.locator("#username").fill("domain");

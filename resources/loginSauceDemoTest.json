@@ -2,6 +2,9 @@
     {
     
         "username":"standard_user",
-        "password":"secret_sauce"
+        "password":"secret_sauce",
+        "firstname":"Uday",
+        "lastname":"Menon",
+        "postalcode":"21542121"
     }
   
