@@ -1,0 +1,19 @@
+Inventory Prices: [ '$29.99', '$9.99', '$15.99', '$49.99', '$7.99', '$15.99' ]
+Found Inventory Names: Sauce Labs Backpack
+Found the element with the text 'Sauce Labs Backpack'.
+Sauce Labs Backpack Add to Cart Button is Clicked
+Found Inventory Names: Sauce Labs Bike Light
+Found Inventory Names: Sauce Labs Bolt T-Shirt
+Found Inventory Names: Sauce Labs Fleece Jacket
+Found Inventory Names: Sauce Labs Onesie
+Found Inventory Names: Test.allTheThings() T-Shirt (Red)
+All Inventory Names: [
+  'Sauce Labs Backpack',
+  'Sauce Labs Bike Light',
+  'Sauce Labs Bolt T-Shirt',
+  'Sauce Labs Fleece Jacket',
+  'Sauce Labs Onesie',
+  'Test.allTheThings() T-Shirt (Red)'
+]
+Found the element with the text 'Sauce Labs Backpack'.
+Clicked on Checkout Button

@@ -223,6 +223,14 @@ test('Add To cart', async({page})=>{
    await zipPostalCodeInput.fill(data.postalcode);
    await continueBtn.click();
 
+        // console.log(await paymentInfoLabel.textContent());
+        // console.log(await paymentInfoValue.textContent());
+        // console.log(await shippingInfoLabel.textContent());
+        // console.log(await shippingInfoValue.textContent());
+        // console.log(await totalInfoLabel.textContent());
+        // console.log(await subTotalLabel.textContent());
+        // console.log(await taxLabel.textContent());
+        // console.log(await totalLabel.textContent());
    
 
    for (const element of nameElements) {
@@ -232,14 +240,6 @@ test('Add To cart', async({page})=>{
   if (trimmedName === targetInventoryName) {
     console.log(`Found the element with the text '${targetInventoryName}'.`);
     if (foundTarget) {
-        // console.log(await paymentInfoLabel.textContent());
-        // console.log(await paymentInfoValue.textContent());
-        // console.log(await shippingInfoLabel.textContent());
-        // console.log(await shippingInfoValue.textContent());
-        // console.log(await totalInfoLabel.textContent());
-        // console.log(await subTotalLabel.textContent());
-        // console.log(await taxLabel.textContent());
-        // console.log(await totalLabel.textContent());
         await expect(finishBtn).toBeVisible();
         await finishBtn.click();
         console.log(`Clicked on Finish Button`);
