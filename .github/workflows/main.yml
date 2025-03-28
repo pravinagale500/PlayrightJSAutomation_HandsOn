@@ -44,7 +44,7 @@ jobs:
       - run: docker build -f Dockerfile.focal -t plimage .
       - run: docker run -d --name plcontainer plimage
       - run: sudo docker cp plcontainer:./tests/allure-results allure results
-      - uses: actions/upload-artifact@main
+      - uses: actions/upload-artifact@master
         with:
           name: allure-results
           path: allure-results
@@ -54,7 +54,7 @@ jobs:
         with:
           ref: gh-pages
           path: gh-pages
-      - uses: simple-elf/allure-report-action@main
+      - uses: simple-elf/allure-report-action@master
         if: always()
         id: allure-report
         with:
