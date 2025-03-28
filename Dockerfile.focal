@@ -1,0 +1,12 @@
+# Use Base Image playwright:focal
+FROM mcr.microsoft.com/playwright:v1.24.0-focal
+USER root
+RUN mkdir /tests
+COPY . /tests
+WORKDIR /tests
+#Install Playwright dependencies
+RUN npm install
+#Install Playwright browser dependencies
+RUN npx playwright install --with-deps 
+RUN npx playwright test
+
