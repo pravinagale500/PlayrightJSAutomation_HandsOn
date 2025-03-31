@@ -1,4 +1,5 @@
-const {test,expect}=require('@playwright/test')
+const {test,expect}=require('@playwright/test');
+const { title } = require('node:process');
 
 
 test('Navigations', async ({page})=>{
@@ -44,12 +45,19 @@ test('Mouse Hover', async ({page})=>{
 
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
      
-    const alertButton = page.locator("#mousehover");
+    const mouseHoverButton = page.locator("#mousehover");
+    const options =page.locator("div.mouse-hover-content a");
     
-    await page.pause();
-    await alertButton.hover();
+    // await page.pause();
+    await mouseHoverButton.hover();
+
+      //click on options
+    await options.first().click();
+    await mouseHoverButton.hover();
+    await options.last().click();
+
     
-    //click on options
+  
 
 })
 
@@ -112,4 +120,101 @@ test(' @regression Child Windows', async ({browser})=>{
 
      await page.locator("#username").fill("domain");
 
+})
+
+
+test('Switch Tab', async ({browser})=>{
+
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+
+    const openTab = page.locator("[href*='qaclickacademy']");
+
+    const[newPage] = await Promise.all(
+    [
+    context.waitForEvent('page'),
+    openTab.click(),
+    ])
+
+    await expect(newPage).toHaveTitle(/QAClick Academy - A Testing Academy to Learn, Earn and Shine/);
+})
+
+test('Switch Window ', async ({browser})=>{
+
+   const context = await browser.newContext();
+   const page = await context.newPage();
+
+   await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+   const openWindow = page.locator("#openwindow");
+   const[newPage] = await Promise.all([
+    context.waitForEvent('page'),
+    openWindow.click(),
+   ])
+   await newPage.waitForLoadState();
+   await expect(newPage).toHaveTitle(/QAClick Academy - A Testing Academy to Learn, Earn and Shine/);
+//---------------------------------------------------------------------------------------------------------
+
+    // Switch to the new page
+    await newPage.bringToFront();
+
+    const accessAllCourses = newPage.locator("div[class='button float-left'] a[class='main-btn']");
+    await accessAllCourses.click();
+    const qaClickAcademytext = newPage.locator("//h1[text()='QA Click Academy']");
+    const qaText= await qaClickAcademytext.textContent();
+    console.log(qaText);
+
+  // Close the first new page.
+  await newPage.close();
+
+  // Close the original page.
+  await page.close();
+
+})
+
+
+test('Dropdown', async ({page})=>{
+
+await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+
+const dropdowns = page.locator("#dropdown-class-example");
+const options = page.locator("#dropdown-class-example option");
+const dropdownList = page.locator("#dropdown-class-example");
+
+//By Label
+await dropdowns.selectOption({label:'Option1'});
+
+// //Visible Text
+await dropdowns.selectOption('Option2');
+
+// //By value
+await dropdowns.selectOption({value:'option3'});
+
+// //Assertions -1
+await expect(options).toHaveCount(4);
+
+// //Assertions -2
+// const dropDownOptions = await page.$$('#dropdown-class-example option');
+// console.log("Number of Options", dropDownOptions.length);
+// await expect(dropDownOptions.length).toBe(4);
+
+//Assertions -3 - value presence
+const content = await dropdownList.textContent();
+await expect(content.includes('Option1')).toBeTruthy();
+
+//Assertion 4 - presence of value in dropdown using looping
+const dropDownOptions = await page.$$('#dropdown-class-example option')
+let status=false;
+for(const option of dropDownOptions){
+
+    let value = await option.textContent();
+    if(value.includes('Option2'))
+        {
+        status=true;
+        break;
+    }
+}
+
+expect(status).toBeTruthy();
 })
