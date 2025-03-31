@@ -215,6 +215,16 @@ for(const option of dropDownOptions){
         break;
     }
 }
-
+  
 expect(status).toBeTruthy();
+
+for(const option of dropDownOptions){
+
+    let value = await option.textContent();
+    if(value.includes('Option2'))
+        {
+        await dropdowns.selectOption('Option2');
+        break;
+    }
+}
 })
