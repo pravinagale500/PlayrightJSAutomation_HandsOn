@@ -1,4 +1,4 @@
-export default class OHRMLoginPage {
+class OHRMLoginPage {
 
     constructor(page){
         this.page=page
@@ -18,3 +18,5 @@ export default class OHRMLoginPage {
     }
   
 }
+
+module.exports=OHRMLoginPage;
