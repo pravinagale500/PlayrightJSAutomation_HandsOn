@@ -1,64 +1,31 @@
-# name: Playwright Tests
-# on:
-#    push:
-#      branches: [ main, master]
-#    pull_request: 
-#      branches: [ main, master]
-# jobs:
-#   test:
-#     timeout-minutes: 60
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v4
-#     - uses: actions/setup-node@v4
-#       with:
-#         node-version: 18
-#     - name: Install dependencies
-#       run: npm ci
-#     - name: Install Playwright Browsers
-#       run: npx playwright install --with-deps
-#     - name: Run Playwright tests
-#       run: npx playwright test
-#     - uses: actions/upload-artifact@v4
-      # if: always()
-#       with:
-#         name: playwright-report
-#         path: playwright-report/
-#         retention-days: 30   
-
-
-name: Playwright Tests in Docker
-
+name: Playwright Tests
 on:
-  push:
-    branches: [ main, master]
-  pull_request:
-    branches: [ main, master]
-
+   push:
+     branches: [ main, master]
+   pull_request: 
+     branches: [ main, master]
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-
-    - name: Build Docker Image
-      run: docker build -t playwright-tests -f Dockerfile.focal .
-
-    - name: Run Playwright Tests in Docker
-      run: docker run --rm playwright-tests npx playwright test
-
-    - name: Upload Playwright Report
-      if: always()
-      run: |
-        docker run --rm -v $(pwd)/playwright-report:/app/playwright-report playwright-tests tar cvf report.tar /app/playwright-report
-        mkdir -p playwright-report-artifact
-        docker cp $(docker ps -aqf "ancestor=playwright-tests"):/report.tar playwright-report-artifact/report.tar
-        tar xvf playwright-report-artifact/report.tar -C playwright-report-artifact
-        mv playwright-report-artifact/playwright-report playwright-report
-      continue-on-error: true
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: npx playwright test
     - uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: playwright-report
         path: playwright-report/
-        retention-days: 30
+        retention-days: 30   
+
+
+
+         
