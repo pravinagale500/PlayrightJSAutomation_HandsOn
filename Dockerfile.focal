@@ -8,6 +8,4 @@ WORKDIR /tests
 RUN npm install
 #Install Playwright browser dependencies
 RUN npx playwright install --with-deps
-# Remove the test execution from the Dockerfile
-RUN npx playwright test
-
+# Test execution should be done in the CI/CD pipeline
