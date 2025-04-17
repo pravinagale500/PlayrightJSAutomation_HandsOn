@@ -9,5 +9,5 @@ RUN npm install
 #Install Playwright browser dependencies
 RUN npx playwright install --with-deps
 # Remove the test execution from the Dockerfile
-# RUN npx playwright test
+RUN npx playwright test
 
