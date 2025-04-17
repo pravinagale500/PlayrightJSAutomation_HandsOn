@@ -41,11 +41,13 @@ jobs:
       with:
         node-version: 18
     - run: docker build -f Dockerfile.focal -t plimage .
-    - run: docker run --name plcontainer plimage # Removed the -d flag
-    - run: docker cp plcontainer:./tests/allure-results allure_results
+    - run: docker run --name plcontainer plimage
     - name: Run Playwright tests
       run: docker exec plcontainer npx playwright test
       continue-on-error: false
+    - name: List container files (debug)
+      run: docker exec plcontainer ls -l /tests
+    - run: docker cp plcontainer:./tests/allure-results allure_results
     - uses: actions/upload-artifact@v4
       with:
         name: allure-results
