@@ -41,7 +41,7 @@ jobs:
       with:
         node-version: 18
     - run: docker build -f Dockerfile.focal -t plimage .
-    - run: docker run --rm --name plcontainer plimage # Use --rm for cleaner cleanup
+    - run: docker run --name plcontainer plimage # Removed the -d flag
     - run: docker cp plcontainer:./tests/allure-results allure_results
     - name: Run Playwright tests
       run: docker exec plcontainer npx playwright test
