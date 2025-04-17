@@ -1,0 +1,71 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: login Organe HRM
+- Location: D:\PlayrightJSAutomation_HandsOn\tests\APIRequestOHRM.spec.js:29:1
+
+# Error details
+
+```
+Error: Timed out 30000ms waiting for expect(locator).toHaveTitle(expected)
+
+Locator: locator(':root')
+Expected pattern: /OrangeHRM/
+Received string:  ""
+Call log:
+  - expect.toHaveTitle with timeout 30000ms
+  - waiting for locator(':root')
+    33 × locator resolved to <html>…</html>
+       - unexpected value ""
+
+    at D:\PlayrightJSAutomation_HandsOn\tests\APIRequestOHRM.spec.js:36:24
+```
+
+# Test source
+
+```ts
+   1 | const {test,expect,request} = require ('@playwright/test');
+   2 | const loginPayload = {username:"Admin",password:"admin123"};
+   3 | let token;
+   4 |
+   5 |
+   6 |     
+   7 | test.beforeAll(async ()=>{
+   8 |
+   9 |     const apiContext = await request.newContext();
+  10 |     const loginResponse1 = await apiContext.post("https://opensource-demo.orangehrmlive.com/web/index.php/auth/validate",
+  11 |     {
+  12 |     
+  13 |     data: loginPayload
+  14 |     
+  15 |     
+  16 |     })
+  17 |     
+  18 |     expect(loginResponse1).toBeTruthy();
+  19 |     const loginResponseBody = await loginResponse1.json();
+  20 |     token = await loginResponseBody.token;
+  21 |     console.log(token);
+  22 |     })
+  23 |
+  24 |
+  25 |
+  26 | test('login Organe HRM', async ({page})=>{
+  27 |     page.addInitScript(value=>
+  28 |         {
+  29 |           window.localStorage.setItem('token', value)
+  30 |         
+  31 |         },token);
+  32 |     // await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+  33 |     await expect(page).toHaveTitle(/OrangeHRM/);
+  34 |     //await expect(page.getByText('Dashboard')).toBeVisible();
+  35 |     await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
+> 36 |     page.close();
+     |                  ^ Error: Timed out 30000ms waiting for expect(locator).toHaveTitle(expected)
+  37 | })
+  38 |
+```

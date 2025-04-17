@@ -1,0 +1,107 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: toHaveScreenshot
+- Location: D:\PlayrightJSAutomation_HandsOn\tests\VisualTesting.spec.js:56:1
+
+# Error details
+
+```
+Error: expect(page).toHaveScreenshot(expected)
+
+  52835 pixels (ratio 0.06 of all image pixels) are different.
+
+Expected: D:\PlayrightJSAutomation_HandsOn\tests\VisualTesting.spec.js-snapshots\toHaveScreenshot-1-chromium-win32.png
+Received: D:\PlayrightJSAutomation_HandsOn\test-results\VisualTesting-toHaveScreenshot-chromium\toHaveScreenshot-1-actual.png
+    Diff: D:\PlayrightJSAutomation_HandsOn\test-results\VisualTesting-toHaveScreenshot-chromium\toHaveScreenshot-1-diff.png
+
+Call log:
+  - expect.toHaveScreenshot with timeout 30000ms
+    - verifying given screenshot expectation
+  - taking page screenshot
+    - disabled all CSS animations
+  - waiting for fonts to load...
+  - fonts loaded
+  - 52835 pixels (ratio 0.06 of all image pixels) are different.
+  - waiting 100ms before taking screenshot
+  - taking page screenshot
+    - disabled all CSS animations
+  - waiting for fonts to load...
+  - fonts loaded
+  - captured a stable screenshot
+  - 52835 pixels (ratio 0.06 of all image pixels) are different.
+
+    at D:\PlayrightJSAutomation_HandsOn\tests\VisualTesting.spec.js:58:24
+```
+
+# Test source
+
+```ts
+   1 | const {test,expect}=require('@playwright/test')
+   2 |
+   3 |
+   4 | test('Verify Logo OrangeHrm', async ({page})=>{
+   5 |
+   6 | await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+   7 |
+   8 | const logo = await page.locator("//img[@alt='company-branding']");
+   9 | const boundingBox = await logo?.boundingBox();
+  10 | if(boundingBox){
+  11 |
+  12 |     expect(boundingBox.width).toBe(275);
+  13 |     // expect(boundingBox.height).toBe(53.53125);
+  14 |
+  15 | }
+  16 |
+  17 | })
+  18 |
+  19 |
+  20 | test('Verify Login Button Visual', async ({ page }) => {
+  21 |     await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+  22 |   
+  23 |     const loginButton =  page.locator("button.oxd-button.oxd-button--medium.oxd-button--main.orangehrm-login-button"); // Corrected selector
+  24 |   
+  25 |
+  26 |     // Optionally, you can also add assertions about the button's properties.
+  27 |     const boundingBox = await loginButton?.boundingBox();
+  28 |     if (boundingBox) {
+  29 |       // These values may change based on browser and OS. Adjust accordingly or remove if not crucial.
+  30 |       expect(boundingBox.width).toBeGreaterThan(80); // Adjust tolerance if needed
+  31 |       expect(boundingBox.height).toBeGreaterThan(30); // Adjust tolerance if needed
+  32 |     }
+  33 |   });
+  34 |
+  35 |
+  36 | test('Confirm logo color', async ({page})=>{
+  37 |
+  38 |     await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+  39 |
+  40 |     // const logo = await page.getByAltText('OrgaheHRM');////img[@alt='company-branding']
+  41 |     const logo = await page.locator("//img[@alt='company-branding']");
+  42 |
+  43 |     //Get the computed style of the button
+  44 |     const logoStyle = await logo.evaluate((element) => {
+  45 |         const style = window.getComputedStyle(element);
+  46 |         return {
+  47 |             color:style.color,
+  48 |         };
+  49 |     });
+  50 |     //Assert the background color of the button
+  51 |     expect(logoStyle.color).toBe("rgb(0, 0, 0)");
+  52 |
+  53 | })
+  54 |
+  55 |
+  56 | test('toHaveScreenshot', async ({ page }) => {
+  57 |     await page.goto('https://playwright.dev');
+> 58 |     await expect(page).toHaveScreenshot({ maxDiffPixels: 100 });
+     |                        ^ Error: expect(page).toHaveScreenshot(expected)
+  59 |   });
+  60 |
+  61 |
+```

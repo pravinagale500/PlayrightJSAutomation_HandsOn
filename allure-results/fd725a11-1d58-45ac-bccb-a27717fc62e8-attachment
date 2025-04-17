@@ -1,0 +1,72 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: login Organe HRM
+- Location: D:\PlayrightJSAutomation_HandsOn\tests\APIRequestOHRM.spec.js:29:1
+
+# Error details
+
+```
+Error: Timed out 30000ms waiting for expect(locator).toBeVisible()
+
+Locator: getByRole('heading', { name: 'Dashboard' })
+Expected: visible
+Received: <element(s) not found>
+Call log:
+  - expect.toBeVisible with timeout 30000ms
+  - waiting for getByRole('heading', { name: 'Dashboard' })
+
+    at D:\PlayrightJSAutomation_HandsOn\tests\APIRequestOHRM.spec.js:38:68
+```
+
+# Test source
+
+```ts
+   1 | const {test,expect,request} = require ('@playwright/test');
+   2 | const loginPayload = {username:"Admin",password:"admin123"};
+   3 | let token;
+   4 |
+   5 | test.describe('Orange HRM API LOgin Test', ()=>{
+   6 |     
+   7 |     test.beforeAll(async ()=>{
+   8 |
+   9 |     const apiContext = await request.newContext();
+  10 |     
+  11 |     const loginResponse1 = await apiContext.post("https://opensource-demo.orangehrmlive.com/web/index.php/auth/validate",
+  12 |     {
+  13 |     
+  14 |     data: loginPayload
+  15 |     
+  16 |     
+  17 |     })
+  18 |     
+  19 |     expect(loginResponse1).toBeTruthy();
+  20 |     const loginResponseBody = await loginResponse1.json();
+  21 |     token = await loginResponseBody.token;
+  22 |     console.log(token);
+  23 |     })
+  24 |
+  25 | })
+  26 |
+  27 |
+  28 |
+  29 | test('login Organe HRM', async ({page})=>{
+  30 |     page.addInitScript(value=>
+  31 |         {
+  32 |           window.localStorage.setItem('token', value)
+  33 |         
+  34 |         },token);
+  35 |     await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+  36 |     await expect(page).toHaveTitle(/OrangeHRM/);
+  37 |     //await expect(page.getByText('Dashboard')).toBeVisible();
+> 38 |     await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
+     |                                                                    ^ Error: Timed out 30000ms waiting for expect(locator).toBeVisible()
+  39 |     page.close();
+  40 | })
+  41 |
+```
