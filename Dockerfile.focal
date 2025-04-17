@@ -1,6 +1,6 @@
 # Use Base Image playwright:focal
 FROM mcr.microsoft.com/playwright:v1.24.0-focal
-USER root
+USER root # Consider using a non-root user if possible
 RUN mkdir /tests
 COPY . /tests
 WORKDIR /tests
@@ -9,5 +9,5 @@ RUN npm install
 #Install Playwright browser dependencies
 RUN npx playwright install --with-deps
 # Remove the test execution from the Dockerfile
-RUN npx playwright test
+# RUN npx playwright test
 

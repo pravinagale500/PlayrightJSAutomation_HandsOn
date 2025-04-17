@@ -2,7 +2,7 @@ const{test,expect}=require('@playwright/test')
 const OHRMLoginPage = require("../pages/Orangehrm_Login.spec.js")
 
 
-test('Login To OrangeHRM POM', async ({page}) =>{
+test('Login to OrangeHRM POM', async ({page}) =>{
     
     const ohrmLoginPage=new OHRMLoginPage(page)
 
